@@ -28,24 +28,45 @@ def custom_sleep(sleep_time:float) -> None:
 get_time_clock = "perf_counter"
 get_time_ns = time.perf_counter_ns
 sleep = custom_sleep
+# sleep = time.sleep
 
+def loop_func(func, args, loops):
+    # measurements =[]
+    # for _ in range(loops):
+    #     measurement = measure_time(func=func, args=args)
+    #     measurements.append(measurement)
+    # return measurements
 
-def main():
+    return[measure_time(func=func,args=args) for _ in range(loops)]
+
+def loop_func_with_break(func, args, loops):
+    # measurements =[]
+    # for _ in range(loops):
+    #     sleep(1)
+    #     measurement = measure_time(func=func, args=args)
+    #     measurements.append(measurement)
+    # return measurements
+    def measure_time_with_brake(func, args):
+        sleep(1)
+        return measure_time(func=func,args=args)
+    return[measure_time_with_brake(func=func,args=args) for _ in range(loops)]
+
+def main_print():
     loops = 10
     product_dot_args = (1,)
     print(f"clock info for {get_time_clock}")
     print(time.get_clock_info(get_time_clock))
     print(sys.version_info)
 
-    print("First call calculate_dot_product")
-    print(measure_time(calculate_dot_product, product_dot_args))
-    print(f"Call calculate_dot_product {loops} times without a break")
-    for _ in range(loops):
-        print(measure_time(calculate_dot_product, product_dot_args))
-    print(f"Call calculate_dot_product {loops} times without a 1 second break")
-    for _ in range(loops):
-        sleep(1)
-        print(measure_time(calculate_dot_product, product_dot_args))
+    # print("First call calculate_dot_product")
+    # print(measure_time(calculate_dot_product, product_dot_args))
+    # print(f"Call calculate_dot_product {loops} times without a break")
+    # for _ in range(loops):
+    #     print(measure_time(calculate_dot_product, product_dot_args))
+    # print(f"Call calculate_dot_product {loops} times without a 1 second break")
+    # for _ in range(loops):
+    #     sleep(1)
+    #     print(measure_time(calculate_dot_product, product_dot_args))
 
     print("First call product_times_10")
     print(measure_time(product_times_10, product_dot_args))
@@ -58,5 +79,15 @@ def main():
         print(measure_time(product_times_10, product_dot_args))
 
 
+def main_time():
+    product_args = (10,)
+    # print("First call product_times_10")
+    initial_call = measure_time(product_times_10,product_args)
+    call_without_break = loop_func(product_times_10, product_args,loops=10)
+    call_with_break = loop_func_with_break(product_times_10, product_args,loops=10)
+    print(f"{initial_call=}, {call_without_break}, {call_with_break}")
+
+
 if __name__ == "__main__":
-    main()
+    # main_print()
+    main_time()
