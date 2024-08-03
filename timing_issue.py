@@ -1,3 +1,4 @@
+import sys
 import time
 import random
 
@@ -34,6 +35,8 @@ def main():
     product_dot_args = (1,)
     print(f"clock info for {get_time_clock}")
     print(time.get_clock_info(get_time_clock))
+    print(sys.version_info)
+
     print("First call calculate_dot_product")
     print(measure_time(calculate_dot_product, product_dot_args))
     print(f"Call calculate_dot_product {loops} times without a break")
