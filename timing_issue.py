@@ -17,9 +17,9 @@ def measure_time(func, args) -> int:
     return get_time_ns() - t0
 
 def custom_sleep(sleep_time:float) -> None:
-    t0: int = time.process_time_ns()
+    t0: int = time.perf_counter_ns()
     timeout: float = sleep_time * 1000_000_000
-    while (time.process_time_ns() - t0 < timeout):
+    while (time.perf_counter_ns() - t0 < timeout):
         pass
 
 
