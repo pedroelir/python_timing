@@ -41,8 +41,8 @@ def main():
         print(measure_time(calculate_dot_product, product_dot_args))
     print(f"Call calculate_dot_product {loops} times without a 1 second break")
     for _ in range(loops):
-        print(measure_time(calculate_dot_product, product_dot_args))
         sleep(1)
+        print(measure_time(calculate_dot_product, product_dot_args))
 
     print("First call product_times_10")
     print(measure_time(product_times_10, product_dot_args))
@@ -51,8 +51,8 @@ def main():
         print(measure_time(product_times_10, product_dot_args))
     print(f"Call product_times_10 {loops} times without a 1 second break")
     for _ in range(loops):
-        print(measure_time(product_times_10, product_dot_args))
         sleep(1)
+        print(measure_time(product_times_10, product_dot_args))
 
 
 if __name__ == "__main__":
