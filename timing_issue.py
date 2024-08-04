@@ -81,11 +81,24 @@ def main_print():
 
 def main_time():
     product_args = (10,)
+    global sleep
     # print("First call product_times_10")
     initial_call = measure_time(product_times_10,product_args)
     call_without_break = loop_func(product_times_10, product_args,loops=10)
-    call_with_break = loop_func_with_break(product_times_10, product_args,loops=10)
-    print(f"{initial_call=}, {call_without_break}, {call_with_break}")
+    sleep = lambda x:x**x
+    call_with_break_lambda = loop_func_with_break(product_times_10, product_args,loops=10)
+    sleep = custom_sleep
+    call_with_break_custom_sleep = loop_func_with_break(product_times_10, product_args,loops=10)
+    sleep = print
+    call_with_break_print = loop_func_with_break(product_times_10, product_args,loops=10)
+    sleep = time.sleep
+    call_with_break_time_sleep = loop_func_with_break(product_times_10, product_args,loops=10)
+    print(f"{initial_call=},")
+    print(f"{call_without_break=},")
+    print(f"{call_with_break_lambda=}.")
+    print(f"{call_with_break_custom_sleep=}.")
+    print(f"{call_with_break_print=}.")
+    print(f"{call_with_break_time_sleep=}.")
 
 
 if __name__ == "__main__":
